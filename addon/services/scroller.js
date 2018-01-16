@@ -22,7 +22,7 @@ export default Em.Service.extend({
   // }),
 
   getScrollable (scrollable) {
-    elem = Em.$(scrollable || SCROLLABLE);
+    const elem = Em.$(scrollable || SCROLLABLE);
     this.set('scrollable', Em.$(scrollable));
     return elem;
   },
