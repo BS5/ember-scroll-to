@@ -4,6 +4,7 @@ export default Em.Component.extend({
 
   // ----- Arguments -----
   href:     null,      // Required
+  scrollable: undefined,
   label:    undefined,
   duration: undefined,
   easing:   undefined,
@@ -28,6 +29,13 @@ export default Em.Component.extend({
       .getJQueryElement(href);
   }),
 
+  jQueryScrollable: Em.computed('scrollable', function() {
+    const scrollable = this.get('scrollable');
+
+    return this
+      .get('scroller')
+      .getJQueryElement(scrollable);
+  }),
 
   // ----- Events -----
   scroll: Em.on('click', function(evt) {

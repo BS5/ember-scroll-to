@@ -3,6 +3,7 @@ import Em from 'ember';
 const DURATION = 750;
 const EASING   = 'swing';
 const OFFSET   = 0;
+const SCROLLABLE = 'html, body';
 
 const { RSVP } = Em;
 
@@ -12,13 +13,19 @@ export default Em.Service.extend({
   duration: DURATION,
   easing:   EASING,
   offset:   OFFSET,
+  scrollable: SCROLLABLE,
 
 
   // ----- Computed properties -----
-  scrollable: Em.computed(function() {
-    return Em.$('html, body');
-  }),
+  // scrollable: Em.computed(function() {
+    // return Em.$('html, body');
+  // }),
 
+  getScrollable (scrollable) {
+    elem = Em.$(scrollable || SCROLLABLE);
+    this.set('scrollable', Em.$(scrollable));
+    return elem;
+  },
 
   // ----- Methods -----
   getJQueryElement (target) {
@@ -37,9 +44,9 @@ export default Em.Service.extend({
     return jQueryElement.offset().top + offset;
   },
 
-  scrollVertical (target, opts = {}) {
+  scrollVertical (scrollable, target, opts = {}) {
     return new RSVP.Promise((resolve, reject) => {
-      this.get('scrollable')
+      this.getScrollable(opts.scrollable)
         .animate(
           {
             scrollTop: this.get('scrollable').scrollTop() - this.get('scrollable').offset().top + this.getVerticalCoord(target, opts.offset)
