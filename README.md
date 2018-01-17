@@ -5,7 +5,7 @@ Animated vertical scrolling to a specified id.
 
 ## Installation
 
-From within your ember-cli project directory: 
+From within your ember-cli project directory:
 
 ```bash
 ember install ember-scroll-to
@@ -36,9 +36,16 @@ If you want to perform some action after scroll:
 {{scroll-to href='#faq' afterScroll='customAction'}}
 ```
 
+You can specify a container of content to scroll instead of using the whole page:
+
+```hbs
+{{scroll-to href='#faq' scrollable='.main-content'}}
+```
+
 The component accepts the following options
 
 * `href` -- (required) a selector of an element to scroll to on click.
+* `scrollable` -- container to scroll. Default is 'html, body'.
 * `label` -- text to display on the component. Ignored when used in a block form.
 * `duration` -- number of milliseconds for the transition to occur over. Default is 750ms.
 * `easing` -- the jQuery animate transition to use. Default is 'swing'. With a standard setup,
@@ -51,6 +58,7 @@ Example usage with all options at once:
 ```hbs
 {{scroll-to
   href='#faq'
+  scrollable='.content'
   label='FAQ'
   duration=1000
   easing='linear'
@@ -77,12 +85,19 @@ this.get('scroller').scrollVertical(target, options);
 
 `options` is a hash with any of the following key-value pairs (all optional):
 
+* `scrollable`
 * `offset`
 * `duration`
 * `easing`
 * `complete` -- a callback to execute once the scrolling animation is complete.
 
 The method returns a Promise that will resolve as soon as the animation has completed.
+
+You can stop the scrolling animation using the `stop` method.
+
+```
+this.get('scroller').stop(scrollabe-container)
+```
 
 ## Configuration
 Some frameworks - like Google's Material Design Lite - will use a custom DOM structure to wrap the main content (e.g. for facilitating responsive design, modal overlays). For use in such environments, you'll want to override the default scrollable element (`html, body`) with the container element that should be used by the service to set the vertical scroll position. To do so, extend the service:
