@@ -58,5 +58,9 @@ export default Em.Service.extend({
         .promise()
         .then(resolve, reject);
     });
+  },
+
+  stop () {
+    this.getScrollable(opts.scrollable).stop();
   }
 });
