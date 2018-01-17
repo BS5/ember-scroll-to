@@ -44,7 +44,7 @@ export default Em.Service.extend({
     return jQueryElement.offset().top + offset;
   },
 
-  scrollVertical (scrollable, target, opts = {}) {
+  scrollVertical (target, opts = {}) {
     return new RSVP.Promise((resolve, reject) => {
       this.getScrollable(opts.scrollable)
         .animate(

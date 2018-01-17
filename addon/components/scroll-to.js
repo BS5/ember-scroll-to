@@ -45,12 +45,12 @@ export default Em.Component.extend({
     this
       .get('scroller')
       .scrollVertical(
-        scrollable,
         this.get('jQueryElement'), {
-        duration: this.get('duration'),
-        offset:   this.get('offset'),
-        easing:   this.get('easing'),
-        complete: () => Em.run(this, this.sendAction, 'afterScroll')
+          scrollable: this.get('scrollable'),
+          duration: this.get('duration'),
+          offset:   this.get('offset'),
+          easing:   this.get('easing'),
+          complete: () => Em.run(this, this.sendAction, 'afterScroll')
       });
   })
 });
