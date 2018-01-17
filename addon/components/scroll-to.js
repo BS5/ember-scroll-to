@@ -44,7 +44,9 @@ export default Em.Component.extend({
 
     this
       .get('scroller')
-      .scrollVertical(this.get('jQueryElement'), {
+      .scrollVertical(
+        scrollable,
+        this.get('jQueryElement'), {
         duration: this.get('duration'),
         offset:   this.get('offset'),
         easing:   this.get('easing'),
