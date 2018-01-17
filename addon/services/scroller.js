@@ -60,7 +60,7 @@ export default Em.Service.extend({
     });
   },
 
-  stop () {
-    this.getScrollable(opts.scrollable).stop();
+  stop (scrollable) {
+    this.getScrollable(scrollable).stop();
   }
 });
